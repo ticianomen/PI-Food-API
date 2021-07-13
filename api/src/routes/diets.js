@@ -1,11 +1,8 @@
 const router = require('express').Router();
 const { Diet } = require('../db.js');
-const fetch = require('node-fetch')
-require('dotenv').config()
 
-const dietsTypes = ["Gluten Free","Ketogenic","Vegetarian","Lacto-Vegetarian","Ovo-Vegetarian","Vegan","Pescetarian","Paleo","Primal","Whole30"]
+const dietsTypes = ["gluten free","ketogenic","vegetarian","lacto vegetarian","ovo vegetarian","vegan","pescetarian","paleo","primal","whole30"]
 
-const{ MY_API_KEY } = process.env;
 
 // GET /types:
 // Obtener todos los tipos de dieta posibles
@@ -17,9 +14,10 @@ router.get('/types', async function(req,res){
 
     if(diets.length<1){
         for (let index = 0; index < dietsTypes.length; index++) {
-            Diet.create({name:dietsTypes[index]})
+            await Diet.create({name:dietsTypes[index]})
         }
         diets = await Diet.findAll()
+        Diet.sync()
     }
     res.status(200).json(diets)
 })

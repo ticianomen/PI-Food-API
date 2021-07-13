@@ -48,7 +48,7 @@ router.get('/recipes', async function(req,res){
 // Crea una receta en la base de datos
 
 router.post('/recipe', async function(req,res){
-    const {name,summary,score,healthScore,stepByStep} = req.body
+    const {title,summary,spoonacularScore,healthScore,instructions} = req.body
     let recipe = await Recipe.create({title,summary,spoonacularScore,healthScore,instructions})
     return res.status(200).json(recipe)
 });
