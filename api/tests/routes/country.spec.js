@@ -3,10 +3,13 @@ const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Recipe, conn } = require('../../src/db.js');
-
 const agent = session(app);
 const recipe = {
-  name: 'Milanea a la napolitana',
+  name: 'Milanesa a la napolitana',
+  summary:"que rico",
+  score:"8",
+  healthScore:"2",
+  stepByStep:"milanga,queso,horno"
 };
 
 describe('Recipe routes', () => {
