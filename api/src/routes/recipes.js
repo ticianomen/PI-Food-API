@@ -4,7 +4,8 @@ const fetch = require('node-fetch')
 const {Op} = require('sequelize')
 require('dotenv').config()
 
-const{ MY_API_KEY } = process.env;
+//MY_API_KEY= e56ac4f1877d486fbd6d3af0cefa18d7 MIA ACORDATE DE BORRAR LA DE MATI
+const{ MY_API_KEYS } = process.env;
 
 // GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
@@ -19,7 +20,7 @@ router.get('/recipes/:id', async function(req,res){
     }
     catch{
         try{
-            const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KEY}`);
+            const response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KEYS}`);
             const recipe = await response.json();
             let data = {
                 image : recipe.image,
@@ -46,38 +47,77 @@ router.get('/recipes/:id', async function(req,res){
 
 router.get('/recipes', async function(req,res){
     const{ name } = req.query
-    if(name){
-        let recipesDB = await Recipe.findAll({
-            limit: 9,
-            where: { 
-                title : {
-                    [Op.substring]: name
-                } 
-            },
-        })
-        if(recipesDB.length>8){
-            res.json(recipesDB)
-        }
-        else{
-            let numbers= 9 - recipesDB.length
-            let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&apiKey=${MY_API_KEY}`)
-            response = await response.json()
-            if(recipesDB.length<1 && response.totalResults===0){
-                res.status(404).send("No hay recetas que coincidan con ese nombre")
+    try{
+        if(name){          
+            let recipesDB = await Recipe.findAll({
+                limit: 100,
+                include: Diet,
+                where: { 
+                    title : {
+                        [Op.substring]: name
+                    } 
+                },
+            })
+            let arrDB =[]
+            recipesDB.map(recipe=>{
+                arrDB.push({
+                    id:recipe.id,
+                    title:recipe.title,
+                    image:recipe.image?recipe.image:'../images/defaultImage.jpg',
+                    diets:recipe.diets.map(diet=>diet.name)
+                })
+            })
+            if(recipesDB.length>99){
+                res.json(recipesDB)
+            }
+            else{
+                let numbers= 100 - recipesDB.length
+                let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEYS}`)
+                response = await response.json()
+                if(recipesDB.length<1 && response.totalResults===0){
+                    res.status(404).send("No hay recetas que coincidan con ese nombre")
+                }else{
+                    let arrRes=[]
+                    response.results.map(recipe=>arrRes.push({
+                    id:recipe.id,
+                    title:recipe.title,
+                    image:recipe.image,
+                    diets:recipe.diets
+                }))
+                    res.json(arrDB.concat(arrRes))
+                }
+            }
+        }else{
+            
+            let recipesDB = await Recipe.findAll({include: Diet})
+            let arrDB =[]
+            recipesDB.map(recipe=>{
+                arrDB.push({
+                    id:recipe.id,
+                    title:recipe.title,
+                    image:recipe.image?recipe.image:'../images/defaultImage.jpg',
+                    diets:recipe.diets.map(diet=>diet.name)
+                })
+            })
+            if(arrDB.length>99){
+                res.json(arrDB)
             }else{
-                res.json(recipesDB.concat(response.results))
+                let numbers= 100 - recipesDB.length
+                let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEYS}`)
+                response = await response.json()
+                let arrRes=[]
+                response.results.map(recipe=>arrRes.push({
+                    id:recipe.id,
+                    title:recipe.title,
+                    image:recipe.image,
+                    diets:recipe.diets
+                }))
+                res.json(arrDB.concat(arrRes))
             }
         }
-    }else{
-        let recipesDB = await Recipe.findAll({ limit: 100 })
-        if(recipesDB.length>99){
-            res.json(recipesDB)
-        }else{
-            let numbers= 100 - recipesDB.length
-            let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&apiKey=${MY_API_KEY}`)
-            response = await response.json()
-            res.json(recipesDB.concat(response.results))
-        }
+    }
+    catch{
+        res.status(404).send("An error ocurred")
     }
 });
 
@@ -87,9 +127,14 @@ router.get('/recipes', async function(req,res){
 
 router.post('/recipe', async function(req,res){
     const {title,summary,spoonacularScore,healthScore,instructions,diets} = req.body
-    let recipe = await Recipe.create({title,summary,spoonacularScore,healthScore,instructions})
+    try{
+    let [recipe] = await Recipe.findOrCreate({where:{title,summary,spoonacularScore,healthScore,instructions}})
     recipe.setDiets(diets)
     return res.status(200).json(recipe)
+    }
+    catch{
+        res.status(404).send("An error ocurred")
+    }
 });
 
 module.exports = router;
