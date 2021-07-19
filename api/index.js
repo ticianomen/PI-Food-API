@@ -21,7 +21,7 @@ const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
 const fetch = require('node-fetch')
 // Syncing all the models at once.
-conn.sync({ force: true }).then(() => {
+conn.sync({ force: false }).then(() => {
   server.listen(3001,async () => {
     console.log('%s listening at 3001');
     await fetch('http://localhost:3001/types')

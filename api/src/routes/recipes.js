@@ -41,7 +41,6 @@ router.get('/recipes/:id', async function(req,res){
                 healthScore : recipe.healthScore,
                 instructions : recipe.instructions?recipe.instructions.replace(/<[^>]*>?/gm, ''):"This recipe doesn't have instructions",
             }
-            console.log(data)
             res.status(200).send(data)
         }
         catch{
