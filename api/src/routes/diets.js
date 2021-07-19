@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const { Diet } = require('../db.js');
 
-const dietsTypes = ["gluten free","ketogenic","vegetarian","lacto vegetarian","ovo vegetarian","vegan","pescetarian","paleo","primal","whole30"]
+const dietsTypes = ["gluten free","ketogenic","vegetarian","lacto ovo vegetarian","dairy free","vegan","pescetarian","paleo","primal","whole30"]
 
 
 // GET /types:
