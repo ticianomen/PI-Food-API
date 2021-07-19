@@ -1,0 +1,57 @@
+
+.section-meals{
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    list-style-type: none;
+}
+
+.pagination{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+    width: 100%;
+}
+
+
+.page-numbers{
+    list-style-type: none;
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.page-numbers li{
+    width: 3rem;
+    height: 3rem;
+    margin-right: 10px;
+    color: white;
+    background-color: #f8a2686e;
+    border: transparent;
+    border-radius: 2px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+.page-numbers li:hover{
+    background: rgba(255, 255, 255, 0.472);
+}
+
+.meals-showcase {
+    list-style: none;
+    width: 100%;
+}
+
+.meals-showcase li{
+    display: flex;
+    flex-wrap: wrap;
+    float: left;
+    width: 25%;
+}
+
+.section-meals li:hover{
+    opacity: 1;
+}

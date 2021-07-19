@@ -26,3 +26,33 @@ export function getRecipeDetail(id){
         });
     };
 }
+
+export function getDiets(){
+    return function(dispatch) {
+        return fetch("http://localhost:3001/types")
+        .then(response => response.json())
+        .then(json => {
+            dispatch({ type: "GET_DIETS", payload: json });
+        });
+    };
+}
+
+export function postRecipe(data){
+    return function(dispatch) {
+        return fetch("http://localhost:3001/recipe", {
+            method: 'POST', // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers:{
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then(json => {
+            dispatch({ type: "POST_RECIPE", payload: json });
+        });
+    };
+}
+
+export function orderAlphabetically(data){
+    return {type: "ORDER", payload: data}
+}

@@ -1,30 +1,48 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import './Home.css';
-import Buscador from "../Buscador/Buscador";
-import Recipes from "../Recipes/Recipes";
-import Recipe from "../Recipe/Recipe";
-// import Pagination from "../Pagination/Pagination";
+import Search from "../Search/Search";
+import Pagination from "../Pagination/Pagination";
+import {getDiets, getRecipes, orderAlphabetically} from '../../actions'
 
-function Home({recipes = []}) {
+function Home(props) {
+    
+    useEffect(()=>{
+        getRecipes();
+        getDiets();
+        orderAlphabetically();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+
+// if(document.referrer &&
+// document.referrer.indexOf("http://localhost:3000/recipes") == -1)
+// {
+//     props.getRecipes();// Page loading process script goes here.
+    
+//     props.getDiets();
+// }
     return (
-        <div>
-            <Buscador/>
-            {/* <Pagination> */}
-            <Recipes>
-                {
-                    recipes.map(recipe=> <Recipe image={recipe.image} title={recipe.title} diets={recipe.diets}/>)
-                }
-            </Recipes>
-            {/* </Pagination> */}
-        </div>
-    )
-}
+        
+        <div className='Search'>
+            <div className='box'>         
+                <Search/>
+                <Pagination/>
+            </div>
 
+        </div>
+    ) 
+}
 function mapStateToProps(state) {
     return {
         recipes: state.recipes
     };
 }
 
-export default connect(mapStateToProps,null)(Home);
+function mapDispatchToProps(dispatch){
+    return{
+        getRecipes: name=>dispatch(getRecipes(name)),
+        getDiets: ()=>dispatch(getDiets()),
+        orderAlphabetically: ()=>dispatch(orderAlphabetically())
+    }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Home);

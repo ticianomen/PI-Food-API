@@ -1,0 +1,19 @@
+.Search{
+    justify-content:space-evenly;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))),url('../../images/backgroundSearch.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../../images/backgroundSearch.jpg');
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+    height: 100vh;
+    font-family: Arial;
+    box-sizing: border-box;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.box{
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+}
