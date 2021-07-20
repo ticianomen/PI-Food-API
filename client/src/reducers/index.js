@@ -2,7 +2,7 @@ const initialState = {
     recipes: [],
     recipesBack:[],
     recipeDetail: {},
-    diets:[]
+    diets:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -29,19 +29,20 @@ function rootReducer(state = initialState, action) {
     if(action.type === "POST_RECIPE"){
         return{
             ...state,
-            recipes: state.recipes?state.recipes.unshift(action.payload):[action.payload]
+            recipes: [...state.recipes,action.payload]
         }
     }
+
     if(action.type === "ORDER"){
         let arr = [...state.recipesBack]; 
             if (action.payload === 'ASC') {
                 return {           
                     ...state,           
                     recipes: arr.sort(function (a, b) {             
-                        if (a.title > b.title) {               
+                        if (a.title.toUpperCase() > b.title.toUpperCase()) {               
                             return 1;             
                         }             
-                        if (a.title < b.title) {               
+                        if (a.title.toUpperCase() < b.title.toUpperCase()) {               
                             return -1;             
                         }             
                         return 0;           
@@ -51,15 +52,33 @@ function rootReducer(state = initialState, action) {
                 return {           
                     ...state,           
                     recipes: arr.sort(function (a, b) {             
-                        if (a.title > b.title) {               
-                            return -1;             }             
-                        if (a.title < b.title) {               
+                        if (a.title.toUpperCase() > b.title.toUpperCase()) {               
+                            return -1;             
+                        }             
+                        if (a.title.toUpperCase() < b.title.toUpperCase()) {               
                             return 1;             
                         }             
                         return 0;           
                     })         
                 }       
             }
+    }
+
+    if(action.type === "FILTER"){
+        let recipesFilter= [...state.recipesBack]
+        if(action.payload === 'lucho'){
+            return{
+                ...state,
+                recipes: recipesFilter
+            }
+        }
+        if(action.payload !== 'lucho'){
+            return{
+                ...state,
+                recipes: recipesFilter.filter(recipe=> recipe.diets.includes(action.payload))
+            }
+        }
+        
     }
 
     return state;

@@ -18,12 +18,10 @@ function CreateRecipe(props) {
 
     useEffect(()=>{
         props.getDiets()
-        props.getRecipes()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])//como sacar warning
 
     const handleChange = (e)=>{
-        console.log(state)
         setState({
             ...state,
             [e.target.name]:e.target.value
@@ -37,8 +35,7 @@ function CreateRecipe(props) {
     }
 
     const fileSelectedHandler = (e)=>{
-        var canvas=document.getElementById('canvas')
-        console.log(canvas.toDataURL())
+        
         setState({
             selectedFile: e.target.files[0].data
         })
@@ -55,7 +52,6 @@ function CreateRecipe(props) {
             timer: 1500
             })
         await props.getRecipes()
-        
         window.location = "http://localhost:3000/recipes";
     }
 
@@ -87,7 +83,7 @@ function CreateRecipe(props) {
                     <p>Tipo de dietas:</p>
                 <div  className="field-check">
                 {
-                    props.diets.map(diet=><label className='container'>{diet.name}<input type="checkbox" name="diets" onChange = {(e)=>handleChangeD(e)} value={diet.id}/><span class="checkmark"></span></label>)
+                    props.diets.map((diet,index)=><label key={index} className='container'>{diet.name}<input type="checkbox" name="diets" onChange = {(e)=>handleChangeD(e)} value={diet.id}/><span className="checkmark"></span></label>)
                 }
                 </div>
                 <label className='image'>

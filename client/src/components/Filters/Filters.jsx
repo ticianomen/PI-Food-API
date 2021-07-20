@@ -1,53 +1,55 @@
 import React , {useEffect,useState} from 'react';
 import { connect } from 'react-redux';
-import {getRecipes,getDiets} from '../../actions/index'
+import {filterDiets} from '../../actions/index'
 import Order from '../OrderAlpha/Order'
 import "./Filters.css"
 
-function Filters(props) {
+function Filters({filterDiets,diets}) {
 
     const [state,setState]=useState({
-        todos: props.recipes,
-        diets: []
+        diets: '',
+        bool: false
     })
-    
-    useEffect(()=>{
-        getRecipes();
-        getDiets();
+  
+    useEffect(() => {
+        if(state.bool){
+            filterDiets(state.diets)
+        }
+        if(!state.bool){
+            filterDiets('lucho')
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    }, [state.bool,state.diets])
 
-    const handleChangeT = (e)=>{
+    const handleChangeT = (e) =>{
         setState({
             ...state,
-            todos: [...state.recipes.filter(recipe=>recipe.diets.find(element => element===e.target.name))]
+            [e.target.name]: e.target.value,
+            bool : e.target.checked
         })
+        
     }
-    
+
     return (
         <div className='filters'>
             <ul className='field-checks'>
                 {
-                    props.diets.map(diet=><label className='containers'><span>{diet.name}</span><input type="checkbox" name='diets' onClick = {(e)=>this.handleChangeT(e)} value={diet.name}/><span class="checkmarks"></span></label>)
+                    diets.map((diet,index)=><label key={index} className='containers'><span>{diet.name}</span><input type="checkbox" name='diets' onChange = {(e)=>handleChangeT(e)} value={diet.name}/><span className="checkmarks"></span></label>)
                 }
                 <Order/>
             </ul>
-        
-        
         </div>
     )
 }
 
 function mapStateToProps(state){
     return{
-        recipes: state.recipes,
         diets: state.diets
     };
 }
 function mapDispatchToProps(dispatch){
     return{
-        getRecipes: () => dispatch(getRecipes()),
-        getDiets: () => dispatch(getDiets()),
+        filterDiets: (name) => dispatch(filterDiets(name))
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps )(Filters);

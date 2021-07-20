@@ -28,7 +28,7 @@ function Order(props) {
 
     return (
         <div className="select_box">
-            <button className="order" type="switch" name ="order" onClick={()=>onChangeSelect()} >{state}</button>
+            <button className="order" type="switch" defaultValue="ASC" name ="order" onClick={()=>onChangeSelect()} >{state}</button>
         </div>
     )
 }

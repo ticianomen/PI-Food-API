@@ -23,7 +23,7 @@
     text-align:center;
     text-transform: uppercase;
     color: #fff;
-    font-size: 240%;
+    font-size: 5rem;
     word-spacing: 4px;
     letter-spacing: 1px;
 }
@@ -33,6 +33,7 @@
     text-transform: uppercase;
     text-align:center;
     color: #fff;
+    font-size: 2rem;
     word-spacing: 2px;
     letter-spacing: 1px;
 }
@@ -46,8 +47,8 @@
 }
 
 .Content button{
-    font-size: 2rem;
-    width: 300px;
+    font-size: 3rem;
+    width: fit-content;
     font-family: 'Roboto Mono', monospace, sans-serif;
     outline: none;
     border-color: rgb(255, 129, 71);

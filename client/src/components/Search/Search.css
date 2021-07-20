@@ -7,7 +7,7 @@
     height: 4rem;
     padding: 12px 23px 2px 30px;
     background-color: transparent;
-    width: 100%;
+    width: max-content;
   }
 
 .searchBar{

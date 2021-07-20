@@ -13,7 +13,7 @@ export default function Recipe({id,title,image,diets=[]}) {
                 <p className="centered">{title}</p>
                 <ul className="bottom-left">
                     {
-                        diets.map(diet=> <li><span>{diet}</span></li>)
+                        diets.map((diet,index)=> <li key={index}><span>{diet}</span></li>)
                     }
                 </ul>
             </div>

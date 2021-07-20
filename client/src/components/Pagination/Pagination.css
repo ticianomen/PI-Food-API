@@ -22,6 +22,7 @@
     flex-direction: row;
     width: 100%;
     justify-content: center;
+    margin-top: 1rem;
 }
 
 .page-numbers li{
@@ -29,7 +30,6 @@
     height: 3rem;
     margin-right: 10px;
     color: white;
-    background-color: #f8a2686e;
     border: transparent;
     border-radius: 2px;
     text-align: center;
@@ -37,7 +37,11 @@
 }
 
 .page-numbers li:hover{
-    background: rgba(255, 255, 255, 0.472);
+    background: rgba(255, 129, 71, 0.459);
+}
+
+.pageActive{
+    background: rgba(255, 129, 71, 0.459);
 }
 
 .meals-showcase {

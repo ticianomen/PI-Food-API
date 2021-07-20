@@ -5,7 +5,8 @@
     background-position:center;
     font-family: 'Roboto Mono', monospace, sans-serif;
     box-sizing: border-box;
-    height: 100vmin;
+    min-height: 100vh;
+    height: 100%;
 }
 .scores{
     margin-top: 40px;
@@ -52,7 +53,7 @@
 
 .contenedor-data label{
     font-size: 2rem;
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 .contenedor-data p{
@@ -76,8 +77,8 @@
 .list ul{
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
     width: fit-content;
+    margin:1rem;
 }
 
 .list ul li{

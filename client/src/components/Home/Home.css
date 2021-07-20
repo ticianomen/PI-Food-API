@@ -5,7 +5,8 @@
     background-size:cover;
     background-position:center;
     background-attachment: fixed;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     font-family: Arial;
     box-sizing: border-box;
     width: 100%;
