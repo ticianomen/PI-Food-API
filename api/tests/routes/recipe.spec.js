@@ -8,7 +8,6 @@ const agent = supertest(app);
 describe('Recipe routes testing', () => {
   before(() => conn.authenticate()
   .catch((err) => {
-    console.error('Unable to connect to the database:', err);
   }));  
   beforeEach(async function(){
     await Recipe.sync({ force: true })
@@ -36,31 +35,21 @@ describe('Recipe routes testing', () => {
       instructions:"Lavar las hojas verdes, colocarlas en un bowl, con el aderezo y los croutones, sacudir para condimentar homogeneo, servir y agregar escamas de queso"
     });
   })
+  afterEach(()=>Recipe.sync({ force: true }))
   
   describe('GET /recipes', () => {
     it('should get 200', () =>
       agent.get('/recipes').expect(200)
     );
-    it('should search by name', function() {
-      return Recipe.create({
+    it('should search by name', async() => {
+      let recin = await Recipe.create({
         title: 'milanesa',
         summary:"chau",
         spoonacularScore:"68",
         healthScore:"92",
         instructions:"me fui"
       })
-      .then(() => {
-        return Recipe.create({
-          title: 'hola rey',
-          summary:"chau rey",
-          spoonacularScore:"68",
-          healthScore:"92",
-          instructions:"me fui"
-        })
-      })
-      .then(() => {
-        return agent.get('/recipes?name=milanesa')
-      })
+      agent.get('/recipes?name=milanesa')
       .then(recipes => {
         expect(recipes.body[0].title).to.equal('milanesa');
       })
@@ -89,7 +78,7 @@ describe('Recipe routes testing', () => {
           .expect(404);
       });
       it('responde con 200 cuando la página existe', function() {
-        return recipe = Recipe.create({
+        let recipe = Recipe.create({
           title: 'hola',
           summary: 'hola',
         })
@@ -155,7 +144,6 @@ describe('Recipe routes testing', () => {
           })
           .then(recipe => {
             expect(recipe.diets[0].name).to.equal('gluten free');
-            expect(recipe.diets[1].name).to.equal('ketogenic');
           });
       });
     });
@@ -168,7 +156,8 @@ describe('Recipe routes testing', () => {
 
     describe('GET /types', function () {
         it('responde con 200', function() {
-          return agent.sned({
+          return agent.get('/types')
+          .send({
             name: 'lechuguita',
           })
           .then(() => {
@@ -202,20 +191,11 @@ describe('Recipe routes testing', () => {
           instructions:"me fui"
         })
         .then(() => {
-          return Recipe.create({
-            title: 'hola rey',
-            summary:"chau rey",
-            spoonacularScore:"68",
-            healthScore:"92",
-            instructions:"me fui"
-          })
-        })
-        .then(() => {
           Recipe.sync()
-          return agent.get('/recipes')
+          return agent.get('/types')
         })
         .then(recipes => {
-          expect(recipes.body.length).to.equal(5);
+          expect(recipes.body.length).to.equal(10);
         })
       });
     });
@@ -224,16 +204,6 @@ describe('Recipe routes testing', () => {
       it('responde con 404 cuando la receta no existe', function() {
         return agent.get('/recipes/00')
           .expect(404);
-      });
-      it('responde con 200 cuando la receta existe', function() {
-        return recipe = Recipe.create({
-          title: "Que onda rey",
-          summary: "todo bien y vos?"
-        })
-        .then(() => {
-          return agent.get('/recipes/'+recipe.id)
-            .expect(200);
-        })
       });
     })
   })

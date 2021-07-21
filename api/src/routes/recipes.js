@@ -4,8 +4,7 @@ const fetch = require('node-fetch')
 const {Op} = require('sequelize')
 require('dotenv').config()
 
-const{ MY_API_LU } = process.env;
-
+const { MY_API_KEV }  = process.env
 // GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de receta
@@ -29,7 +28,7 @@ router.get('/recipes/:id', async function(req,res){
     }
     catch{
         try{
-            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_LU}`);
+            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KEV}`);
             let recipe = await response.json();
             if(recipe.code != 404){
                 let data = {
@@ -37,10 +36,10 @@ router.get('/recipes/:id', async function(req,res){
                     title : recipe.title,
                     dishTypes : recipe.dishTypes,
                     diets : recipe.diets,
-                    summary : recipe.summary?recipe.summary.replace(/<[^>]*>?/gm, ''):"This recipe doesn't have a summary",
+                    summary : recipe.summary.replace(/<[^>]*>?/gm, ''),
                     spoonacularScore : recipe.spoonacularScore,
                     healthScore : recipe.healthScore,
-                    instructions : recipe.instructions?recipe.instructions.replace(/<[^>]*>?/gm, ''):"This recipe doesn't have instructions",
+                    instructions : recipe.instructions.replace(/<[^>]*>?/gm, ''),
                 }
                 res.status(200).send(data)
             }else{
@@ -48,7 +47,7 @@ router.get('/recipes/:id', async function(req,res){
             }
         }
         catch{
-            res.status(404).send("An error ocurred")
+            res.status(404).send("An error ocurred with the API")
         }
     }
     
@@ -62,7 +61,7 @@ router.get('/recipes', async function(req,res){
     const{ name } = req.query
     try{
         if(name){          
-            let recipesDB = await Recipe.findAll({
+            const recipesDB = await Recipe.findAll({
                 limit: 100,
                 include: Diet,
                 where: { 
@@ -71,7 +70,7 @@ router.get('/recipes', async function(req,res){
                     } 
                 },
             })
-            let arrDB =[]
+            const arrDB =[]
             recipesDB.map(recipe=>{
                 arrDB.push({
                     id:recipe.id,
@@ -84,13 +83,13 @@ router.get('/recipes', async function(req,res){
                 res.json(recipesDB)
             }
             else{
-                let numbers= 100 - arrDB.length
-                let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_LU}`)
+                const numbers= 100 - arrDB.length
+                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEV}`)
                 response = await response.json()
                 if(arrDB.length<1 && response.totalResults && response.totalResults===0){
                     res.status(404).send("No hay recetas que coincidan con ese nombre")
                 }else{
-                    let arrRes=[]
+                    const arrRes=[]
                     response.results.map(recipe=>arrRes.push({
                     id:recipe.id,
                     title:recipe.title,
@@ -101,8 +100,8 @@ router.get('/recipes', async function(req,res){
                 }
             }
         }else{
-            let recipesDB = await Recipe.findAll({include: Diet})
-            let arrDB =[]
+            const recipesDB = await Recipe.findAll({include: Diet})
+            const arrDB =[]
             recipesDB.map(recipe=>{
                 arrDB.push({
                     id:recipe.id,
@@ -114,19 +113,30 @@ router.get('/recipes', async function(req,res){
             if(arrDB.length>99){
                 res.json(arrDB)
             }else{
-                let numbers= 100 - arrDB.length
-                let response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_LU}`)
-                response =  await response.json()
-                let arrRes=[]
-                if(response){
-                    response.results.map(recipe=>arrRes.push({
-                    id:recipe.id,
-                    title:recipe.title,
-                    image:recipe.image,
-                    diets:recipe.diets
-                }))
+                try{
+                    let numbers= 100 - arrDB.length
+                    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEV}`)
+                    const resp =  await response.json()
+                    const arrRes=[]
+
+                    if(resp){
+                        resp.results.map(recipe=>arrRes.push({
+                        id:recipe.id,
+                        title:recipe.title,
+                        image:recipe.image,
+                        diets:recipe.diets
+                    }))
+                    }
+                    res.status(200).json(arrDB.concat(arrRes))  
                 }
-                res.status(200).json(arrDB.concat(arrRes))
+                catch{
+                    if(res.length>0){
+                        res.status(200).status(arrDB)
+                        console.log("Something went wrong with the API")
+                    }else{
+                        res.status(404).send("An error ocurred with the API")
+                    }
+                }
             }
         }
     }
