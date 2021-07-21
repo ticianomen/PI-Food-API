@@ -36,10 +36,10 @@ router.get('/recipes/:id', async function(req,res){
                     title : recipe.title,
                     dishTypes : recipe.dishTypes,
                     diets : recipe.diets,
-                    summary : recipe.summary.replace(/<[^>]*>?/gm, ''),
+                    summary : recipe.summary?recipe.summary.replace(/<[^>]*>?/gm, ''):'',
                     spoonacularScore : recipe.spoonacularScore,
                     healthScore : recipe.healthScore,
-                    instructions : recipe.instructions.replace(/<[^>]*>?/gm, ''),
+                    instructions : recipe.instructions?recipe.instructions.replace(/<[^>]*>?/gm, ''):'',
                 }
                 res.status(200).send(data)
             }else{
