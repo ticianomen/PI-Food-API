@@ -7,7 +7,7 @@
     background-attachment: fixed;
     min-height: 100vh;
     height: 100%;
-    font-family: Arial;
+    font-family: 'Roboto Mono', monospace, sans-serif;
     box-sizing: border-box;
     width: 100%;
     flex-wrap: wrap;

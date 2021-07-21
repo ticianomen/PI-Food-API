@@ -41,6 +41,7 @@
   background-color: #fc835e57;
   color: #ccc;
   width: fit-content;
+  cursor: pointer;
   border: transparent;
 }
 .searchBar button:hover{

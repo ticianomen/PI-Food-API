@@ -7,9 +7,10 @@
 }
 
 .field-checks{
-    width: fit-content;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    justify-content: flex-start;
+    text-align: start;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .field-checks label span{
 background: #f8a26831;
@@ -23,14 +24,13 @@ border-radius: 5px;
 
 /* Customize the label (the container) */
 .containers {
-    display:inline-flex;
+    display:flex;
     color: white;
-    justify-content: space-around;
-    text-align: justify;
-    margin-bottom: 1rem;
-    margin-right: 2rem;
+    margin-top: 10px;
+    justify-content: flex-start;
+    text-align: start;
     cursor: pointer;
-    font-size: 2rem;
+    font-size:1.5rem;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -48,6 +48,7 @@ border-radius: 5px;
 
   /* Create a custom checkbox */
 .checkmarks {
+    margin-right: 10px;
     position: relative;
     top: 1px;
     left: 5px;

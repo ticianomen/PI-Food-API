@@ -1,13 +1,16 @@
 .body{
-    justify-content:space-evenly;
     background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.7))),url("../../images/miti-qYreP9QOdrk-unsplash.jpg");
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url("../../images/miti-qYreP9QOdrk-unsplash.jpg");
     background-size:cover;
     background-position:center;
     background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
     font-family: 'Roboto Mono', monospace, sans-serif;
-    height: 100vh;
+    box-sizing: border-box;
+    width: 100%;
 }
+
 .title{
     text-align: center;
     width: 500px;
@@ -20,9 +23,9 @@
 .form{
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
+    margin: 20vh auto;
     color: #999;
-    width: 60%;
+    width: fit-content;
     height: auto;
     padding: 10px 10px 10px 20px;
     background-color: white;
@@ -78,10 +81,10 @@
 
 .field-check{
     width: 100%;
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    justify-content: space-between;
 }
 
 .field-check label{
@@ -95,8 +98,9 @@
 /* Customize the label (the container) */
 .container {
     display:inline-flex;
-    justify-content: space-around;
-    text-align: justify;
+    justify-content: flex-start;
+    text-align: start;
+    margin-top: 10px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 1rem;
@@ -117,6 +121,7 @@
 
   /* Create a custom checkbox */
 .checkmark {
+    margin-right: 5px;
     position: relative;
     top: 0;
     left: 2px;
@@ -184,6 +189,7 @@
     border-color: rgb(255, 129, 71);
     border-radius: 3px;
     color: white;
+    cursor: pointer;
     background-color: rgb(255, 129, 71);
 }
 .form button:hover{

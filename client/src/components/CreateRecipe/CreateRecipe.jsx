@@ -34,12 +34,12 @@ function CreateRecipe(props) {
         })
     }
 
-    const fileSelectedHandler = (e)=>{
+    // const fileSelectedHandler = (e)=>{
         
-        setState({
-            selectedFile: e.target.files[0].data
-        })
-    }
+    //     setState({
+    //         selectedFile: e.target.files[0].data
+    //     })
+    // }
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
@@ -57,7 +57,7 @@ function CreateRecipe(props) {
 
     return (
         <div className='body'>
-
+            <div className='formi'>
             <form className='form' onSubmit = {(e)=>handleSubmit(e)} >
             <h1 className='title'>Create your own recipe</h1>
                 <label>
@@ -83,22 +83,18 @@ function CreateRecipe(props) {
                     <p>Tipo de dietas:</p>
                 <div  className="field-check">
                 {
-                    props.diets.map((diet,index)=><label key={index} className='container'>{diet.name}<input type="checkbox" name="diets" onChange = {(e)=>handleChangeD(e)} value={diet.id}/><span className="checkmark"></span></label>)
+                    props.diets.map((diet,index)=><label key={index} className='container'><input type="checkbox" name="diets" onChange = {(e)=>handleChangeD(e)} value={diet.id}/><span className="checkmark"></span>{diet.name}</label>)
                 }
                 </div>
-                <label className='image'>
+                {/* <label className='image'>
                     <p>Imagen del plato:</p>
                     <input type="file" name="image" id='canvas' className="field" onChange={fileSelectedHandler}/>
-                </label>
+                </label> */}
                 <br/>
                 <button type="submit" className="field">CREATE</button>
-                
-                
-                
-                
-                
+
             </form>
-            
+            </div>
         </div>
     )
 }

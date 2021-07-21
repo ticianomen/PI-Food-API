@@ -34,10 +34,10 @@ function Filters({filterDiets,diets}) {
         <div className='filters'>
             <ul className='field-checks'>
                 {
-                    diets.map((diet,index)=><label key={index} className='containers'><span>{diet.name}</span><input type="checkbox" name='diets' onChange = {(e)=>handleChangeT(e)} value={diet.name}/><span className="checkmarks"></span></label>)
+                    diets.map((diet,index)=><label key={index} className='containers'><input type="checkbox" name='diets' onChange = {(e)=>handleChangeT(e)} value={diet.name}/><span className="checkmarks"></span><span>{diet.name}</span></label>)
                 }
-                <Order/>
             </ul>
+            <Order/>
         </div>
     )
 }
