@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: auto;
+    min-height: 80vh;
     width: 100%;
 }
 
@@ -45,11 +45,13 @@
 }
 
 .meals-showcase {
+    display: flex;
     list-style: none;
     width: 100%;
 }
 
 .meals-showcase li{
+    max-width: 25%;
     display: flex;
     flex-wrap: wrap;
     float: left;

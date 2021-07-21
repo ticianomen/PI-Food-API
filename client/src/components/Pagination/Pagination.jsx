@@ -2,10 +2,9 @@ import React, {useState,useEffect} from 'react';
 import { connect } from 'react-redux';
 import Recipes from '../Recipes/Recipes';
 import Recipe from '../Recipe/Recipe';
-import {getRecipes} from '../../actions/index'
 import './Pagination.css'
 
-function Pagination({getRecipes,recipes}) {
+function Pagination({recipes}) {
   const [state, setState] = useState({
     todos: recipes,
     currentPage: 1,
@@ -31,14 +30,13 @@ function Pagination({getRecipes,recipes}) {
     const indexOfLastTodo = (state.currentPage * state.todosPerPage);
     const indexOfFirstTodo = indexOfLastTodo - state.todosPerPage;
     const currentTodos = state.todos.slice(indexOfFirstTodo, indexOfLastTodo);
-    // const currentTodos = (state.todos.length > 1) ? state.todos.slice(indexOfFirstTodo, indexOfLastTodo) : state.todos;
     const renderTodos = currentTodos.map((todo, index) => {
       return <li key={index}>{todo}</li>;
     });
     const firstHalf = []
     const secondHalf = []
     for (let index = 0; index < renderTodos.length; index++) {
-      if(index<renderTodos.length/2){
+      if(index<4){
         firstHalf.push(renderTodos[index])
       }else{
         secondHalf.push(renderTodos[index])
@@ -106,4 +104,4 @@ function mapStatesToProps(state){
   }
 }
 
-export default connect(mapStatesToProps, { getRecipes } )(Pagination);
+export default connect(mapStatesToProps, null )(Pagination);

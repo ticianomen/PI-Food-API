@@ -30,7 +30,7 @@ useEffect(()=>{
                                     <h2>Diets: </h2>
                                     <ul>
                                     {
-                                        props.recipeDetail.diets?props.recipeDetail.diets.map((diet,index)=><li key={index}>{diet}</li>):<li>{props.recipeDetail.diet}</li>
+                                        props.recipeDetail.diets?props.recipeDetail.diets.map((diet,index)=><li key={index}>{diet}</li>):<li>No diets</li>
                                     }
                                     </ul>
                                 </div>
@@ -38,15 +38,15 @@ useEffect(()=>{
                                     <h2>Type of Dish: </h2> 
                                     <ul>
                                     {
-                                        props.recipeDetail.dishTypes?props.recipeDetail.dishTypes.map((dish,index)=><li key={index}>{dish}</li>):<li>{props.recipeDetail.dishTypes}</li>
+                                        props.recipeDetail.dishTypes?props.recipeDetail.dishTypes.map((dish,index)=><li key={index}>{dish}</li>):<li>No dishTypes</li>
                                     }
                                     </ul>
                                 </div>
                                 </div>
                             </div>
                         </div>
-                        <label>Recipe summary: </label><p>{props.recipeDetail.summary}</p>
-                        <label>Step by step: </label><p>{props.recipeDetail.instructions}</p>
+                        <label>Recipe summary: </label><p>{props.recipeDetail.summary?props.recipeDetail.summary:"This recipe does not have a summary"}</p>
+                        <label>Step by step: </label><p>{props.recipeDetail.instructions?props.recipeDetail.instructions:"This recipe does not have instructions"}</p>
                     </div>
                 </div>
             </div>
