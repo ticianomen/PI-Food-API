@@ -30,11 +30,11 @@ useEffect(()=>{
                                     <h2>Diets: </h2>
                                     <ul>
                                     {
-                                        props.recipeDetail.diets.length>0?props.recipeDetail.diets.map((diet,index)=><li key={index}>{diet}</li>):<li>No diets</li>
+                                        (props.recipeDetail.diets&&props.recipeDetail.diets.length>0)?props.recipeDetail.diets.map((diet,index)=><li key={index}>{diet}</li>):<li>No diets</li>
                                     }
                                     </ul>
                                 </div>
-                                <div className="list">
+                                <div className="list-ING">
                                     <h2>Ingredients: </h2> 
                                     <div className="list-ingrdients">
                                     {
@@ -47,6 +47,14 @@ useEffect(()=>{
                                     <ul>
                                     {
                                         props.recipeDetail.dishTypes?props.recipeDetail.dishTypes.map((dish,index)=><li key={index}>{dish}</li>):<li>No dishTypes</li>
+                                    }
+                                    </ul>
+                                </div>
+                                <div className="list">
+                                    <h2>Cuisines: </h2> 
+                                    <ul>
+                                    {
+                                        (props.recipeDetail.cuisines&&props.recipeDetail.cuisines.length>0)?props.recipeDetail.cuisines.map((cuisine,index)=><li key={index}>{cuisine}</li>):<li>No cuisines</li>
                                     }
                                     </ul>
                                 </div>

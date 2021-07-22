@@ -17,6 +17,7 @@
     margin: 0 auto;
     border-radius: 3px;
     color: white;
+    padding: 5px;
     background-color: rgb(255, 129, 71);
     border-color: white;
 }
@@ -43,9 +44,11 @@
 .field{
     border: solid 1px #ccc;
     margin-bottom: 2rem;
+    font-family: 'Roboto Mono', monospace, sans-serif;
     padding:5px;
     font-size: 1rem;
     height: 100px;
+    border-radius: 15px;
     resize: none;
     margin-top: 0.5rem;
 }
@@ -56,10 +59,14 @@
 
 .form textarea{
     border-radius: 1px;
+    font-family: 'Roboto Mono', monospace, sans-serif;
+    border-radius: 5px;
     /* background-color: #e1ebdf; */
     height: 60px;
+    outline:#f8a168;
     width: 80%;
-    border: solid 1px #ccc;
+    border: solid 2px #ccc;
+    font-family: 'Roboto Mono', monospace, sans-serif;
     overflow-wrap: break-word;
     display: inline-block;
     white-space: pre-wrap;
@@ -68,13 +75,15 @@
 }
 
 .field-title{
-    outline: none;
-    border: solid 1px #ccc;
+    font-family: 'Roboto Mono', monospace, sans-serif;
     width: 80%;
     padding:5px;
     margin-bottom: 2rem;
+    border-radius: 5px;
     font-size: 1rem;
+    border: solid 2px #ccc;
 }
+
 .field:focus{
     border-color: rgba(7, 7, 12, 0.116);
 }
@@ -163,24 +172,51 @@
     transform: rotate(35deg);
 } 
 
-.field-score{
-    font-size: 2rem;
-    margin-bottom: 2rem;
+.middle-scores{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    font-size: 1.3rem;
     outline: none;
-    border: solid 1px #ccc;
-    padding: 1px;
-    font-size: 1rem;
-    height: 2.2rem;
-    width: 3rem;
+    margin-top: 1rem;
+    padding: 1rem;
 }
 
+.middle-scores input{
+    margin-top: 1rem;
+    outline:#f8a168;
+    border: solid 2px #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.middle-scores option{
+    font-size: 1rem;
+    font-family: 'Roboto Mono', monospace, sans-serif;
+}
+
+.select{
+    margin-top: 1rem;
+}
+
+.select select{
+    
+    outline:#f8a168;
+    border: solid 2px #ccc;
+    border-radius: 5px;
+}
+
+.select p{
+    margin-bottom: 1rem;
+}
 .image{
     height: auto;
     width: fit-content;
 }
 .image input{
+    font-family: 'Roboto Mono', monospace, sans-serif;
     height: auto;
     width: fit-content;
+    border-radius: 5px;
 }
 
 .form button{
