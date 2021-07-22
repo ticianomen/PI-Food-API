@@ -10,7 +10,7 @@
     display: grid;
     justify-content: flex-start;
     text-align: start;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 .field-checks label span{
 background: #f8a26831;

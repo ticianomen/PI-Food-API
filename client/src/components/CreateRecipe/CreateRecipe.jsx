@@ -12,7 +12,7 @@ function CreateRecipe(props) {
         healthScore:0,
         instructions:'',
         diets:[],
-        selectedFile:null
+        image:''
     })
 
 
@@ -33,15 +33,23 @@ function CreateRecipe(props) {
             diets:[...state.diets, e.target.value]
         })
     }
-
-    // const fileSelectedHandler = (e)=>{
-        
-    //     setState({
-    //         selectedFile: e.target.files[0].data
-    //     })
-    // }
+    function handleImage(e){
+        var filesSelected = e.target.files;
+        if (filesSelected.length > 0){
+            var fileToLoad = filesSelected[0];
+            var fileReader = new FileReader();
+            fileReader.onload = function(fileLoadedEvent){
+                setState({
+                    ...state,
+                    image:fileLoadedEvent.target.result
+                })
+            };
+            fileReader.readAsDataURL(fileToLoad);
+        }
+    }
 
     const handleSubmit = async (e)=>{
+        console.log(state)
         e.preventDefault();
         await props.postRecipe(state)
             await Swal.fire({
@@ -86,10 +94,10 @@ function CreateRecipe(props) {
                     props.diets.map((diet,index)=><label key={index} className='container'><input type="checkbox" name="diets" onChange = {(e)=>handleChangeD(e)} value={diet.id}/><span className="checkmark"></span>{diet.name}</label>)
                 }
                 </div>
-                {/* <label className='image'>
+                <label className='image'>
                     <p>Imagen del plato:</p>
-                    <input type="file" name="image" id='canvas' className="field" onChange={fileSelectedHandler}/>
-                </label> */}
+                    <input type="file" name="image" id='inputFileToLoad' className="field" onChange={(e)=>handleImage(e)}/>
+                </label>
                 <br/>
                 <button type="submit" className="field">CREATE</button>
 
