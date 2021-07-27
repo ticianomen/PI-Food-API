@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import './CreateRecipe.css'
 import { postRecipe,getDiets, getRecipes } from "../../actions";
 import Swal from 'sweetalert2'
+import Autocomplete from '../Autocompleate/Autocomplete'
 
 function CreateRecipe(props) {
     const [state,setState]= useState({
@@ -67,14 +68,6 @@ function CreateRecipe(props) {
             </option>
             )
     });
-    // const ingredients = []
-    // const renderIngrdients = dishTypes.map((ingredient,index) => {
-    //         return (
-    //         <option key={index} value={ingredient}>
-    //         {ingredient}
-    //         </option>
-    //         )
-    // });
 
     const handleSubmit = async (e)=>{
         console.log(state)
@@ -94,7 +87,7 @@ function CreateRecipe(props) {
     return (
         <div className='body'>
             <div className='formi'>
-            <form className='form' onSubmit = {(e)=>handleSubmit(e)} >
+            <form className='form' data-netlify="true" name="createRecipe" onSubmit = {(e)=>handleSubmit(e)} >
             <h1 className='title'>Create your own recipe</h1>
                 <label>
                     <p>Recipe Title:</p>
@@ -123,8 +116,7 @@ function CreateRecipe(props) {
                     <select name="dishTypes" multiple="multiple" onChange = {(e)=>handleChangeD(e)}>{renderDishTypes}</select>
                 </label>
                 {/* <label className="select">
-                    <p>Select ingredients:</p>
-                    <select name="ingredients" multiple="multiple" onChange = {(e)=>handleChangeD(e)}>{renderDishTypes}</select>
+                    {Autocomplete}
                 </label> */}
 
 
