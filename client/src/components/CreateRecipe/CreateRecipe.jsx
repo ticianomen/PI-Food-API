@@ -118,10 +118,7 @@ function CreateRecipe(props) {
                 {/* <label className="select">
                     {Autocomplete}
                 </label> */}
-
-
                 </div>
-                
                 <label>
                     <p>Instructions:</p>
                     <textarea name='instructions' className="field" onChange = {(e)=>handleChange(e)}></textarea>

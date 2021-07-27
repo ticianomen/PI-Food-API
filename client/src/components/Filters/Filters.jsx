@@ -9,20 +9,20 @@ function Filters({filterDiets,diets}) {
     const [state,setState]=useState({
         diets: []
     })
-  
+    console.log(state.diets)
     useEffect(() => {
         filterDiets(state.diets)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.diets])
 
     const handleChangeT = (e) =>{
-        if(e.target.checked){
+        if(e.target.checked===true){
             setState({
                 ...state,
                 diets: [...diets,e.target.value]
             })
         }
-        if(!e.target.checked){
+        if(e.target.checked===false){
             setState({
             ...state,
             diets: diets.filter(diet=> diet!==e.target.value)
