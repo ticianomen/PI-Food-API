@@ -2,7 +2,7 @@
 const { expect } = require('chai');
 const { Recipe, Diet, conn } = require('../../src/db.js')
 
-describe('Recipe model', () => {
+xdescribe('Recipe model', () => {
   
   before(() => conn.authenticate()
     .catch((err) => {
