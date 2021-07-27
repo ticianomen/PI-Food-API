@@ -81,7 +81,7 @@ function CreateRecipe(props) {
             timer: 1500
             })
         await props.getRecipes()
-        window.location = "http://localhost:3000/recipes";
+        window.location = "https://60ff5b889ce22f242e0d437d--vibrant-engelbart-ba5ef1.netlify.app/recipes";
     }
 
     return (
