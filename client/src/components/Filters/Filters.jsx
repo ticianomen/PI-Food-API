@@ -7,26 +7,28 @@ import "./Filters.css"
 function Filters({filterDiets,diets}) {
 
     const [state,setState]=useState({
-        diets: '',
-        bool: false
+        diets: []
     })
   
     useEffect(() => {
-        if(state.bool){
-            filterDiets(state.diets)
-        }
-        if(!state.bool){
-            filterDiets('lucho')
-        }
+        filterDiets(state.diets)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [state.bool,state.diets])
+    }, [state.diets])
 
     const handleChangeT = (e) =>{
-        setState({
+        if(e.target.checked){
+            setState({
+                ...state,
+                diets: [...diets,e.target.value]
+            })
+        }
+        if(!e.target.checked){
+            setState({
             ...state,
-            [e.target.name]: e.target.value,
-            bool : e.target.checked
+            diets: diets.filter(diet=> diet!==e.target.value)
         })
+        }
+        
         
     }
 

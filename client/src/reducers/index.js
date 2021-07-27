@@ -66,18 +66,11 @@ function rootReducer(state = initialState, action) {
 
     if(action.type === "FILTER"){
         let recipesFilter= [...state.recipesBack]
-        if(action.payload === 'lucho'){
-            return{
-                ...state,
-                recipes: recipesFilter
-            }
-        }
-        if(action.payload !== 'lucho'){
+        
             return{
                 ...state,
                 recipes: recipesFilter.filter(recipe=> recipe.diets.includes(action.payload))
             }
-        }
         
     }
 
