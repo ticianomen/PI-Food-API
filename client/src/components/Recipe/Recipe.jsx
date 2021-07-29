@@ -4,7 +4,15 @@ import './Recipe.css'
 import defaultImage from '../../images/defaultImage.jpg'
 
 export default function Recipe({id,title,image,diets=[]}) {
-    return (
+
+    if(title==='No recipes matched that name'){
+        return(
+            <div className='meal-notFound'>
+                <h2 className="notFound">{title}</h2>
+            </div>
+        )
+    }else{
+        return (
         
             <div className='meal'>
                 <Link to ={`/recipes/${id}`}>
@@ -19,4 +27,6 @@ export default function Recipe({id,title,image,diets=[]}) {
             </div>
         
     )
+    }
+    
 }
