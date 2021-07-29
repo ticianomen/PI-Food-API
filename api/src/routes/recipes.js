@@ -90,7 +90,7 @@ router.get('/recipes', async function(req,res){
                 const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KE}`)
                 const respon = await response.json()
                 if(arrDB.length<1 && respon.results.length<1){
-                    res.status(304).send("No hay recetas que coincidan con ese nombre")
+                    res.status(404).json([{title:'No recipes matched that name'}])
                 }else{
                     const arrRes=[]
                     respon.results.map(recipe=>arrRes.push({
