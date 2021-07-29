@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import './CreateRecipe.css'
 import { postRecipe,getDiets, getRecipes } from "../../actions";
 import Swal from 'sweetalert2'
-import Autocomplete from '../Autocompleate/Autocomplete'
+// import Autocomplete from '../Autocompleate/Autocomplete'
 
 function CreateRecipe(props) {
     const [state,setState]= useState({
