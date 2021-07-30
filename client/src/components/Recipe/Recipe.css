@@ -63,3 +63,17 @@
     -webkit-transform: scale(1);
     transform: scale(1);
 }
+
+.meal-notFound{
+    position: absolute;
+    width: 100%;
+    margin: 0 auto;
+    margin-top:20px;
+    text-align: center;
+}
+
+.notFound{
+    font-size: 3rem;
+    color: white;
+    background-color: rgba(255, 129, 71, 0.459);
+}
