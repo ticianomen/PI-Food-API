@@ -2,33 +2,31 @@ import React , {useEffect,useState} from 'react';
 import { connect } from 'react-redux';
 import {filterDiets} from '../../actions/index'
 import Order from '../OrderAlpha/Order'
+import OrderScore from '../OrderScore/OrderScore'
 import "./Filters.css"
 
 function Filters({filterDiets,diets}) {
 
     const [state,setState]=useState({
-        diets: []
+        diets: [],
     })
-    console.log(state.diets)
     useEffect(() => {
         filterDiets(state.diets)
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [state.diets])
 
     const handleChangeT = (e) =>{
-        if(e.target.checked===true){
-            setState({
-                ...state,
-                diets: [...diets,e.target.value]
-            })
-        }
-        if(e.target.checked===false){
+        if(e.target.checked){
             setState({
             ...state,
-            diets: diets.filter(diet=> diet!==e.target.value)
-        })
+            diets: [...state.diets,e.target.value],
+            })
+        }else{
+            setState({
+                ...state,
+                diets: state.diets.filter(diet=> diet!==e.target.value),
+                })
         }
-        
         
     }
 
@@ -39,6 +37,7 @@ function Filters({filterDiets,diets}) {
                     diets.map((diet,index)=><label key={index} className='containers'><input type="checkbox" name='diets' onChange = {(e)=>handleChangeT(e)} value={diet.name}/><span className="checkmarks"></span><span>{diet.name}</span></label>)
                 }
             </ul>
+            <OrderScore/>
             <Order/>
         </div>
     )

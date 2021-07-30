@@ -79,14 +79,14 @@ function Pagination({recipes}) {
           <ul className="meals-showcase">
           <Recipes>
                   {
-                    firstHalf.map((recipe,index)=><li key={index}> <Recipe id={recipe.props.children.id} image={recipe.props.children.image} title={recipe.props.children.title} diets={recipe.props.children.diets}/></li>)
+                    firstHalf.map((recipe,index)=><li key={index}> <Recipe id={recipe.props.children.id} image={recipe.props.children.image} title={recipe.props.children.title} diets={recipe.props.children.diets} spoonacularScore={recipe.props.children.spoonacularScore} healthScore={recipe.props.children.healthScore}/></li>)
                   }
           </Recipes>
           </ul>
           <ul className="meals-showcase">
           <Recipes >
                   {
-                    secondHalf.map((recipe,index)=><li key={index}> <Recipe id={recipe.props.children.id} image={recipe.props.children.image} title={recipe.props.children.title} diets={recipe.props.children.diets}/></li>)
+                    secondHalf.map((recipe,index)=><li key={index}> <Recipe id={recipe.props.children.id} image={recipe.props.children.image} title={recipe.props.children.title} diets={recipe.props.children.diets} spoonacularScore={recipe.props.children.spoonacularScore} healthScore={recipe.props.children.healthScore}/></li>)
                   }
           </Recipes>
           </ul>

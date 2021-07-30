@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './Recipe.css'
 import defaultImage from '../../images/defaultImage.jpg'
 
-export default function Recipe({id,title,image,diets=[]}) {
+export default function Recipe({id,title,image,diets=[],spoonacularScore,healthScore}) {
 
     if(title==='No recipes matched that name'){
         return(
@@ -19,6 +19,10 @@ export default function Recipe({id,title,image,diets=[]}) {
                     <img src={image?image:defaultImage} className='meal-photo' alt={title + ' image'}/>
                 </Link>
                 <p className="centered">{title}</p>
+                
+                    <span className='score1'>{spoonacularScore}</span>
+                    <span className='score2'>{healthScore}</span>
+
                 <ul className="bottom-left">
                     {
                         diets.map((diet,index)=> <li key={index}><span>{diet}</span></li>)

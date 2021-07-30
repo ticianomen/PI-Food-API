@@ -56,6 +56,9 @@ export function postRecipe(data){
 export function orderAlphabetically(data){
     return {type: "ORDER", payload: data}
 }
+export function orderScore(data){
+    return {type: "ORDER_SCORE", payload: data}
+}
 
 export function filterDiets(data){
     return {type: "FILTER", payload: data}

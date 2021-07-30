@@ -32,6 +32,42 @@
     font-size: 1.1rem;
 }
 
+.score1 {
+    color:rgba(255, 255, 255, 0.719);
+    position: absolute;
+    padding: 0;
+    bottom: 40%;
+    left: 3px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: fit-content;
+    font-size: 3rem;
+    text-align: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.24)),url('../../images/Spoon.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+}
+.score2 {
+    color:rgba(255, 255, 255, 0.719);
+    position: absolute;
+    padding: 0;
+    bottom: 40%;
+    right: 3px;
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: fit-content;
+    font-size: 3rem;
+    text-align: center;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.315), rgba(0, 0, 0, 0.24)),url('../../images/Healthy.png');
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+}
 
 .centered {
     color: white;
