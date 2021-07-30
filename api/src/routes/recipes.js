@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const {Op} = require('sequelize')
 require('dotenv').config()
 
-const { MY_API_KE }  = process.env
+const { MY_API_KEY }  = process.env
 // GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de receta
@@ -29,7 +29,7 @@ router.get('/recipes/:id', async function(req,res){
     }
     catch{
         try{
-            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KE}`);
+            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KEY}`);
             let recipe = await response.json();
             if(recipe.code != 404){
                 let data = {
@@ -76,10 +76,12 @@ router.get('/recipes', async function(req,res){
             const arrDB =[]
             recipesDB.map(recipe=>{
                 arrDB.push({
-                    id:recipe.id,
-                    title:recipe.title,
-                    image:recipe.image?recipe.image:"",
-                    diets:recipe.diets.map(diet=>diet.name)
+                    id : recipe.id,
+                    title : recipe.title,
+                    image : recipe.image?recipe.image:"",
+                    diets : recipe.diets.map(diet=>diet.name),
+                    spoonacularScore : dietDB.spoonacularScore,
+                    healthScore : dietDB.healthScore,
                 })
             })
             if(recipesDB.length>99){
@@ -87,17 +89,19 @@ router.get('/recipes', async function(req,res){
             }
             else{
                 const numbers= 100 - arrDB.length
-                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KE}`)
+                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEY}`)
                 const respon = await response.json()
                 if(arrDB.length<1 && respon.results.length<1){
                     res.status(404).json([{title:'No recipes matched that name'}])
                 }else{
                     const arrRes=[]
                     respon.results.map(recipe=>arrRes.push({
-                    id:recipe.id,
-                    title:recipe.title,
-                    image:recipe.image,
-                    diets:recipe.diets
+                    id : recipe.id,
+                    title : recipe.title,
+                    image : recipe.image,
+                    diets : recipe.diets,
+                    spoonacularScore : recipe.spoonacularScore,
+                    healthScore : recipe.healthScore,
                 }))
                     res.json(arrDB.concat(arrRes))
                 }
@@ -107,10 +111,12 @@ router.get('/recipes', async function(req,res){
             const arrDB =[]
             recipesDB.map(recipe=>{
                 arrDB.push({
-                    id:recipe.id,
-                    title:recipe.title,
-                    image:recipe.image?recipe.image:"",
-                    diets:recipe.diets.map(diet=>diet.name)
+                    id : recipe.id,
+                    title : recipe.title,
+                    image : recipe.image?recipe.image:"",
+                    diets : recipe.diets.map(diet=>diet.name),
+                    spoonacularScore : recipe.spoonacularScore,
+                    healthScore : recipe.healthScore,
                 })
             })
             if(arrDB.length>99){
@@ -118,16 +124,18 @@ router.get('/recipes', async function(req,res){
             }else{
                 try{
                     let numbers= 100 - arrDB.length
-                    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KE}`)
+                    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEY}`)
                     const resp =  await response.json()
                     const arrRes=[]
 
                     if(resp){
                         resp.results.map(recipe=>arrRes.push({
-                        id:recipe.id,
-                        title:recipe.title,
-                        image:recipe.image,
-                        diets:recipe.diets
+                        id : recipe.id,
+                        title : recipe.title,
+                        image : recipe.image,
+                        diets : recipe.diets,
+                        spoonacularScore : recipe.spoonacularScore,
+                        healthScore : recipe.healthScore,
                     }))
                     }
                     res.status(200).json(arrDB.concat(arrRes))  
