@@ -2,17 +2,18 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import './Search.css';
 import { getRecipes,getDiets} from "../../actions";
+import Loading from '../../images/Loading.gif'
 
 function Search(props){
   const [state,setState] = useState({
     recipes:"",
   })
+  const [loading,setLoading]=useState(false)
   useEffect(()=>{
-      getRecipes()
-      getDiets();
+    getRecipes();
+    getDiets();
   },[])
 
-  let inputRef = React.createRef()
 
   function handleChange(e){
     setState({
@@ -21,23 +22,38 @@ function Search(props){
     })
   }
 
+  let inputRef = React.createRef()
+
   function handleSubmit(e){
     e.preventDefault()
-    props.getRecipes(state.recipes)
-    props.getDiets()
+    setLoading(true)
+    async function get(){
+      await props.getRecipes(state.recipes)
+      await props.getDiets()
+      setLoading(false)
+    }
+    get()
     inputRef.current.value = '';
   }
-
+if(loading){
   return(
-    <form className="search" onSubmit={(e)=> handleSubmit(e)}>
-      <div className="searchBar">
-      <input type="text" placeholder="Search recipes..." ref= {inputRef} className='placehold' name="recipes" value={state.recipes} onChange={(e)=> handleChange(e)}/>
-      <button type="submit" onClick={(e)=> handleSubmit(e)}>
-        SEARCH
-      </button>
-      </div>
-    </form> 
-  )
+    <div className="contenedor">
+        <img className="loading" src = {Loading} alt = 'Loading' />
+        Loading... 
+    </div>
+)
+}else{
+    return(
+      <form className="search" onSubmit={(e)=> handleSubmit(e)}>
+        <div className="searchBar">
+        <input type="text" placeholder="Search recipes..." ref= {inputRef} className='placehold' name="recipes" onChange={(e)=> handleChange(e)}/>
+        <button type="submit" onClick={(e)=> handleSubmit(e)}>
+          SEARCH
+        </button>
+        </div>
+      </form> 
+    )
+  }
 }
 
 function mapStateToProps(state) {

@@ -96,6 +96,7 @@ function Pagination({recipes}) {
         </ul>
       </div>
     );
+
 }
 
 function mapStatesToProps(state){

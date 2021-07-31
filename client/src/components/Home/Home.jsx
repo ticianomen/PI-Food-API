@@ -1,22 +1,38 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
 import './Home.css';
 import Search from "../Search/Search";
 import Filters from '../Filters/Filters';
 import Pagination from "../Pagination/Pagination";
 import {getDiets, getRecipes,filterDiets,orderAlphabetically} from '../../actions'
+import Loading from '../../images/Loading.gif'
 
 function Home({getDiets,getRecipes,filterDiets,orderAlphabetically}) {
     
+const [loading,setLoading]=useState(false)
+
     useEffect(()=>{
-        getRecipes();
-        getDiets();
-        filterDiets();
-        orderAlphabetically()
+        setLoading(true)
+        async function fetch(){
+            await getRecipes();
+            await getDiets();
+            await filterDiets();
+            await orderAlphabetically()
+            setLoading(false)
+        }
+        fetch()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
-
+if(loading){
+    return(
+        <div className="contenedor">
+            <img className="loading" src = {Loading} alt = 'Loading' />
+            Loading... 
+        </div>
+    )
+}
+else{
     return (
         <div className='Search'>
             <div className='box'>         
@@ -27,6 +43,7 @@ function Home({getDiets,getRecipes,filterDiets,orderAlphabetically}) {
 
         </div>
     ) 
+}
 }
 function mapStateToProps(state) {
     return {

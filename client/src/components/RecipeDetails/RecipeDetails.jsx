@@ -1,4 +1,4 @@
-import React,{ useEffect } from 'react';
+import React,{ useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getRecipeDetail } from '../../actions/index';
 import './RecipeDetails.css';
@@ -9,12 +9,26 @@ import Loading from '../../images/Loading.gif'
 
 function Details(props) {
 
+    const [loading,setLoading]=useState(false)
+
     useEffect(()=>{
-        props.getRecipeDetail(props.match.params.id)
+        setLoading(true)
+        async function getDetails(){
+            await props.getRecipeDetail(props.match.params.id)
+            setLoading(false)
+        }
+        getDetails()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
-    
-    if(props.recipeDetail.title){
+
+    if(loading){
+    return(
+        <div className="contenedor">
+            <img className="loading" src = {Loading} alt = 'Loading' />
+            Loading... 
+        </div>
+    )
+    }else{
             return (
             <div className="recipe-detail">
                 <div className='contenedor'>
@@ -70,16 +84,7 @@ function Details(props) {
                 </div>
             </div>
         );
-    }else{
-        return(
-            <div className="contenedor">
-                <img className="loading" src = {Loading} alt = 'Loading' />
-                Loading... 
-            </div>
-        )
     }
-
-    
 }
 
 function mapStateToProps(state){
