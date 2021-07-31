@@ -62,6 +62,7 @@
     background-color: rgba(255, 255, 255, 0.082);
     padding: 5px;
     border: transparent;
+    word-wrap: break-word;
     border-radius: 3px;
     margin: 0 20%;
     font-size: 1.5rem;
@@ -160,4 +161,12 @@
     flex-direction: column;
     height: fit-content;
     justify-content: space-around;
+}
+
+.loading{
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../../images/Loading.gif');
+    position: relative;
+    justify-content: center;
+    margin-left: 45%;
+    margin-top: 10%;
 }

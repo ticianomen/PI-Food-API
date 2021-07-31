@@ -195,14 +195,19 @@
 }
 
 .select{
+    display: flex;
+    flex-direction: column;
     margin-top: 1rem;
 }
+.ingredients{
+    max-width: 80vh;
+    margin-bottom: 1rem;
+    display:grid;
+    width: 100%;
+}
 
-.select select{
-    
-    outline:#f8a168;
-    border: solid 2px #ccc;
-    border-radius: 5px;
+.ingredients p{
+    margin-bottom: 1rem;
 }
 
 .select p{

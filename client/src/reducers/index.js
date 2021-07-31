@@ -102,7 +102,8 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 recipes: [...state.recipesBack]
             }
-        }else{
+        }
+        else if(action.payload){
             return{
                 ...state,
                 recipes: recipesFilter.filter(recipe=> action.payload.every(diet => recipe.diets.includes(diet)))

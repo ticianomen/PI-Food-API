@@ -12,6 +12,8 @@ function Search(props){
       getDiets();
   },[])
 
+  let inputRef = React.createRef()
+
   function handleChange(e){
     setState({
       ...state,
@@ -23,12 +25,13 @@ function Search(props){
     e.preventDefault()
     props.getRecipes(state.recipes)
     props.getDiets()
+    inputRef.current.value = '';
   }
 
   return(
     <form className="search" onSubmit={(e)=> handleSubmit(e)}>
       <div className="searchBar">
-      <input type="text" placeholder="Search recipes..." className='placehold' name="recipes" value={state.recipes} onChange={(e)=> handleChange(e)}/>
+      <input type="text" placeholder="Search recipes..." ref= {inputRef} className='placehold' name="recipes" value={state.recipes} onChange={(e)=> handleChange(e)}/>
       <button type="submit" onClick={(e)=> handleSubmit(e)}>
         SEARCH
       </button>

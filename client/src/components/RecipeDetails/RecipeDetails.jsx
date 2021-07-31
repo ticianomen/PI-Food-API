@@ -5,14 +5,17 @@ import './RecipeDetails.css';
 import Spoon from '../../images/Spoon.png'
 import Healthy from '../../images/Healthy.png'
 import defaultImage from '../../images/defaultImage.jpg'
+import Loading from '../../images/Loading.gif'
 
 function Details(props) {
 
-useEffect(()=>{
-    props.getRecipeDetail(props.match.params.id)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-},[])
-        return (
+    useEffect(()=>{
+        props.getRecipeDetail(props.match.params.id)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+    
+    if(props.recipeDetail.title){
+            return (
             <div className="recipe-detail">
                 <div className='contenedor'>
                     
@@ -67,6 +70,15 @@ useEffect(()=>{
                 </div>
             </div>
         );
+    }else{
+        return(
+            <div className="contenedor">
+                <img className="loading" src = {Loading} alt = 'Loading' />
+                Loading... 
+            </div>
+        )
+    }
+
     
 }
 
