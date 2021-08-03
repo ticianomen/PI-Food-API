@@ -20,7 +20,7 @@ export default function Recipe({id,title,image,diets=[],spoonacularScore}) {
                 </Link>
                 <p className="centered">{title}</p>
                 
-                    <span className='score2'>{spoonacularScore}</span>
+                    <span className='card-number card-circle subtle'>{spoonacularScore}</span>
 
                 <ul className="bottom-left">
                     {
