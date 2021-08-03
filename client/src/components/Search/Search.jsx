@@ -24,14 +24,14 @@ function Search(props){
 
   let inputRef = React.createRef()
 
+  async function get(){
+    await props.getRecipes(state.recipes)
+    await props.getDiets()
+    setLoading(false)
+  }
   function handleSubmit(e){
     e.preventDefault()
     setLoading(true)
-    async function get(){
-      await props.getRecipes(state.recipes)
-      await props.getDiets()
-      setLoading(false)
-    }
     get()
     inputRef.current.value = '';
   }

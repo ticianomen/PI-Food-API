@@ -164,7 +164,6 @@
 }
 
 .loading{
-    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('../../images/Loading.gif');
     position: relative;
     justify-content: center;
     margin-left: 45%;

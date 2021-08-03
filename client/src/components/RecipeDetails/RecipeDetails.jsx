@@ -11,12 +11,13 @@ function Details(props) {
 
     const [loading,setLoading]=useState(false)
 
+    async function getDetails(){
+        await props.getRecipeDetail(props.match.params.id)
+        setLoading(false)
+    }
+
     useEffect(()=>{
         setLoading(true)
-        async function getDetails(){
-            await props.getRecipeDetail(props.match.params.id)
-            setLoading(false)
-        }
         getDetails()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])

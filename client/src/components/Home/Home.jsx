@@ -11,15 +11,16 @@ function Home({getDiets,getRecipes,filterDiets,orderAlphabetically}) {
     
 const [loading,setLoading]=useState(false)
 
+async function fetch(){
+    await getRecipes();
+    await getDiets();
+    await filterDiets();
+    await orderAlphabetically()
+    setLoading(false)
+}
+
     useEffect(()=>{
         setLoading(true)
-        async function fetch(){
-            await getRecipes();
-            await getDiets();
-            await filterDiets();
-            await orderAlphabetically()
-            setLoading(false)
-        }
         fetch()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
