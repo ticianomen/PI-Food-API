@@ -29,6 +29,7 @@ function Search(props){
     await props.getDiets()
     setLoading(false)
   }
+  
   function handleSubmit(e){
     e.preventDefault()
     setLoading(true)
