@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const {Op} = require('sequelize')
 require('dotenv').config()
 
-const { MY_API_KE }  = process.env
+const { MY_API_KEYS }  = process.env
 // GET /recipes/{idReceta}:
 // Obtener el detalle de una receta en particular
 // Debe traer solo los datos pedidos en la ruta de detalle de receta
@@ -30,7 +30,7 @@ router.get('/recipes/:id', async function(req,res){
     }
     catch{
         try{
-            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KE}`);
+            let response = await fetch(`https://api.spoonacular.com/recipes/${id}/information?apiKey=${MY_API_KEYS}`);
             let recipe = await response.json();
             if(recipe.code != 404){
                 let data = {
@@ -90,7 +90,7 @@ router.get('/recipes', async function(req,res){
             }
             else{
                 const numbers= 100 - arrDB.length
-                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KE}`)
+                const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?titleMatch=${name}&number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEYS}`)
                 const respon = await response.json()
                 if(arrDB.length<1 && respon.results.length<1){
                     res.status(404).json([{title:'No recipes matched that name'}])
@@ -125,7 +125,7 @@ router.get('/recipes', async function(req,res){
             }else{
                 try{
                     let numbers= 100 - arrDB.length
-                    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KE}`)
+                    const response = await fetch(`https://api.spoonacular.com/recipes/complexSearch?number=${numbers}&addRecipeInformation=true&apiKey=${MY_API_KEYS}`)
                     const resp =  await response.json()
                     const arrRes=[]
 
