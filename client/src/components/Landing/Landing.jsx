@@ -12,7 +12,7 @@ function Landing({getRecipes,getDiets}) {
         getDiets();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])//sin [] se ejecuta infinito 
-        //con [] se ejecuta cuando se monta
+        //state en vez de useeffect
     return (
         <div className='Body'>
             <div className='Content'>

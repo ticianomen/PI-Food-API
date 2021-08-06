@@ -187,8 +187,8 @@ ingredients.map((ingredient)=> renderIngredients.push({value:ingredient, label:i
             timer: 1500
             })
         await props.getRecipes()
-        // window.location = "http://localhost:3000/recipes";
-        window.location = "https://ticianomensegue.com.ar/recipes"
+        window.location = "http://localhost:3000/recipes";
+        // window.location = "https://ticianomensegue.com.ar/recipes"
     }
 
     return (

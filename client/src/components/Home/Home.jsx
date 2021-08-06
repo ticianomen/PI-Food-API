@@ -18,6 +18,8 @@ async function fetch(){
     await orderAlphabetically()
     setLoading(false)
 }
+//use localstorage ??
+
 
     useEffect(()=>{
         setLoading(true)

@@ -1,5 +1,4 @@
 {
-  "homepage": ".",
   "name": "client",
   "version": "0.1.0",
   "private": true,
@@ -7,7 +6,7 @@
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.1",
     "@testing-library/user-event": "^12.2.2",
-    "netlify-cli": "^5.4.16",
+    "netlify-cli": "^5.2.10",
     "node-fetch": "^2.6.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -22,7 +21,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
