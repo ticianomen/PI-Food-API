@@ -30,6 +30,30 @@
     <title>Food App</title>
   </head>
   <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  var firebaseConfig = {
+    apiKey: "AIzaSyB1EmEn1EyZMX2lBqpu8Vvllo7TaRKAHyY",
+    authDomain: "my-food-app-bab3e.firebaseapp.com",
+    databaseURL: "https://my-food-app-bab3e-default-rtdb.firebaseio.com",
+    projectId: "my-food-app-bab3e",
+    storageBucket: "my-food-app-bab3e.appspot.com",
+    messagingSenderId: "397464475672",
+    appId: "1:397464475672:web:c5ccafb7beabdcf7a90b6d",
+    measurementId: "G-5GF7TJ7F67"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
