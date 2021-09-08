@@ -24,7 +24,7 @@ const fetch = require('node-fetch')
 conn.sync({ force: true }).then(() => {
   server.listen(3001,async () => {
     console.log('%s listening at 3001');
-    await fetch('http://localhost:3001/types')
+    await fetch('https://food-app-ticiano.herokuapp.com/types')
     console.log("Tipos de dietas precargados!")
      // eslint-disable-line no-console
   });
