@@ -15,7 +15,7 @@ server.use(express.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://pi-food-ft-14b.vercel.app");
+  res.header("Access-Control-Allow-Origin", "https://food-app-ticiano.herokuapp.com");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
