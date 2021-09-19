@@ -24,13 +24,14 @@ const fetch = require('node-fetch')
 conn.sync({ force: true }).then(() => {
   server.listen(8000,async () => {
     console.log('%s listening at 8000');
-    try{
-      await fetch('https://pi-food-api.herokuapp.com:8000/types')
-      console.log("Tipos de dietas precargados!")
-    }
-    catch{
-      console.log("Tipos de dietas no cargaron!")
-    }
+    // try{
+    //   await fetch('https://pi-food-api.herokuapp.com:8000/types')
+    //   console.log("Tipos de dietas precargados!")
+    // }
+    // catch{
+    //   console.log("Tipos de dietas no cargaron!")
+    // }
+    console.log("Connected!");
      // eslint-disable-line no-console
   });
 });
