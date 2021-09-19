@@ -24,7 +24,12 @@ const fetch = require('node-fetch')
 conn.sync({ force: true }).then(() => {
   server.listen(8000,async () => {
     console.log('%s listening at 8000');
-    await fetch('https://food-app-ticiano.herokuapp.com:8000/types')
+    try{
+      await fetch('https://pi-food-api.herokuapp.com:8000/types')
+    }
+    catch{
+      console.log("Tipos de dietas no cargaron!")
+    }
     console.log("Tipos de dietas precargados!")
      // eslint-disable-line no-console
   });
