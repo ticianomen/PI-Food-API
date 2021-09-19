@@ -22,9 +22,9 @@ const { conn } = require('./src/db.js');
 const fetch = require('node-fetch')
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001,async () => {
-    console.log('%s listening at 3001');
-    await fetch('https://food-app-ticiano.herokuapp.com/types')
+  server.listen(8000,async () => {
+    console.log('%s listening at 8000');
+    await fetch('https://food-app-ticiano.herokuapp.com:8000/types')
     console.log("Tipos de dietas precargados!")
      // eslint-disable-line no-console
   });
